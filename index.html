@@ -6,6 +6,1809 @@
     <title>Document</title>
 </head>
 <body>
-    Hello world!
+      <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAMEVERSE - 6 Game Dalam 1</title>
+
+<style>
+:root {
+  --bg: #0b1020;
+  --card: #151c35;
+  --accent: #7c5cff;
+  --accent2: #00d4ff;
+  --good: #32d583;
+  --bad: #ff5c7a;
+  --text: #f7f8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at top, #202b5c, #080b17 65%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: 28px 15px 12px;
+}
+
+.logo {
+  font-size: clamp(32px, 6vw, 60px);
+  font-weight: 900;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #00d4ff, #a87cff, #ff75b5);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.sub {
+  opacity: .8;
+  margin-top: 8px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px;
+}
+
+.stat {
+  background: #111936;
+  border: 1px solid #33406d;
+  border-radius: 16px;
+  padding: 10px 18px;
+  min-width: 120px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 16px;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.game-card {
+  cursor: pointer;
+  background: linear-gradient(145deg, #1c2650, #11182f);
+  border: 1px solid #354373;
+  border-radius: 22px;
+  padding: 22px;
+  transition: .2s;
+  box-shadow: 0 10px 30px #0005;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  border-color: #8f7cff;
+}
+
+.icon {
+  font-size: 50px;
+}
+
+.game-card h2 {
+  margin: 10px 0;
+}
+
+.game-card p {
+  color: #bfc8e8;
+  min-height: 44px;
+}
+
+.panel {
+  background: #111936ef;
+  border: 1px solid #354373;
+  border-radius: 24px;
+  padding: 24px;
+  max-width: 760px;
+  margin: 18px auto;
+  box-shadow: 0 15px 40px #0007;
+}
+
+.question {
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 800;
+  line-height: 1.35;
+  margin: 18px 0;
+  text-align: center;
+}
+
+.hint {
+  text-align: center;
+  color: #9fb0e6;
+  margin: 8px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(135deg, #7057ff, #9d5cff);
+  transition: .2s;
+}
+
+button:hover {
+  transform: scale(1.02);
+  filter: brightness(1.12);
+}
+
+.option {
+  background: #202a50;
+  text-align: left;
+  border: 1px solid #3b4b7c;
+}
+
+.option.correct {
+  background: #18794e;
+}
+
+.option.wrong {
+  background: #a52f49;
+}
+
+input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid #42517d;
+  background: #0b1125;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.timerbar {
+  height: 12px;
+  background: #252d4c;
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 15px 0;
+}
+
+.timerfill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d4ff, #7c5cff, #ff75b5);
+  width: 100%;
+  transition: width 1s linear;
+}
+
+.word {
+  font-size: 38px;
+  letter-spacing: 8px;
+  text-align: center;
+  font-weight: 900;
+  color: #ffdf70;
+  margin: 22px;
+}
+
+.emoji {
+  font-size: 70px;
+  text-align: center;
+}
+
+.story {
+  font-size: 18px;
+  line-height: 1.6;
+  background: #0c1329;
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.notice {
+  text-align: center;
+  font-weight: bold;
+  min-height: 26px;
+  margin: 12px;
+}
+
+.progress {
+  text-align: center;
+  color: #b8c5ef;
+}
+
+.back {
+  background: #27345e;
+}
+
+.win {
+  font-size: 60px;
+  text-align: center;
+  animation: bounce .7s infinite alternate;
+}
+
+@keyframes bounce {
+  to {
+    transform: translateY(-12px) rotate(4deg);
+  }
+}
+
+@media(max-width: 600px) {
+  .options {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1 class="logo">🎮 GAMEVERSE 🎮</h1>
+  <div class="sub">
+    6 GAME SERU DALAM SATU • Jawab pertanyaan • Naik level • Kumpulkan skor!
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat">⭐ Skor<br><b id="score">0</b></div>
+  <div class="stat">❤️ Nyawa<br><b id="lives">5</b></div>
+  <div class="stat">🏆 Level<br><b id="level">1</b></div>
+  <div class="stat">🔥 Streak<br><b id="streak">0</b></div>
+</div>
+
+<div class="container">
+
+  <!-- MENU UTAMA -->
+  <section id="home" class="screen active">
+
+    <div class="menu">
+
+      <div class="game-card" onclick="startGame('word')">
+        <div class="icon">🔤</div>
+        <h2>Tebak Kata</h2>
+        <p>Susun huruf acak menjadi kata yang benar.</p>
+      </div>
+
+      <div class="game-card" onclick="startGame('quiz')">
+        <div class="icon">🧠</div>
+        <h2>Kuis Pintar</h2>
+        <p>Jawab berbagai pertanyaan pengetahuan umum.</p>
+      </div>
+
+      <div class="game-card" onclick="startGame('math')">
+        <div class="icon">🔢</div>
+        <h2>Matematika Cepat</h2>
+        <p>Lawan waktu dan jawab secepat mungkin!</p>
+      </div>
+
+      <div class="game-card" onclick="startGame('horror')">
+        <div class="icon">👻</div>
+        <h2>Horor Interaktif</h2>
+        <p>Pilih jalanmu dan selamat dari rumah misterius.</p>
+      </div>
+
+      <div class="game-card" onclick="startGame('adventure')">
+        <div class="icon">🗺️</div>
+        <h2>Petualangan</h2>
+        <p>Buat pilihan dan temukan harta karun.</p>
+      </div>
+
+      <div class="game-card" onclick="startGame('emoji')">
+        <div class="icon">😄</div>
+        <h2>Tebak Emoji</h2>
+        <p>Tebak arti dari kombinasi emoji.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- AREA GAME -->
+  <section id="game" class="screen">
+
+    <div class="panel">
+
+      <div class="progress" id="gameTitle"></div>
+
+      <div class="timerbar">
+        <div id="timerFill" class="timerfill"></div>
+      </div>
+
+      <div id="content"></div>
+
+      <div id="notice" class="notice"></div>
+
+      <div class="row">
+        <button class="back" onclick="goHome()">🏠 Menu Utama</button>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<script>
+
+/* =========================
+   DATA PEMAIN
+========================= */
+
+let score = 0;
+let lives = 5;
+let level = 1;
+let streak = 0;
+
+let current = "";
+let timer = null;
+let time = 20;
+
+
+/* =========================
+   DATA TEBAK KATA
+========================= */
+
+const wordData = [
+
+  ["KUCING", "HEWAN PELIHARAAN YANG SUKA MENGEONG"],
+  ["SEKOLAH", "TEMPAT UNTUK BELAJAR"],
+  ["KOMPUTER", "ALAT ELEKTRONIK UNTUK BEKERJA"],
+  ["INDONESIA", "NEGARA TEMPAT KITA TINGGAL"],
+  ["PELANGI", "MUNCUL SETELAH HUJAN DAN MATAHARI"],
+  ["PANTAI", "TEMPAT BERTEMU LAUT DAN DARATAN"],
+  ["SAHABAT", "TEMAN YANG SELALU ADA"],
+  ["MATEMATIKA", "ILMU TENTANG ANGKA"],
+  ["TELEPON", "ALAT UNTUK BERKOMUNIKASI"],
+  ["MERDEKA", "BEBAS DARI PENJAJAHAN"],
+  ["BUKU", "DIBACA UNTUK MENDAPAT ILMU"],
+  ["MUSIK", "SENI YANG DIDENGARKAN"]
+  ["APEL","BUAH YANG SERING BERWARNA MERAH"],
+  ["MANGGA","BUAH TROPIS BERWARNA KUNING"],
+  ["JERUK","BUAH YANG MEMILIKI RASA ASAM MANIS"],
+  ["WORTEL","SAYUR BERWARNA ORANYE"],
+  ["BAYAM","SAYUR BERWARNA HIJAU"],
+  ["SINGA","DIKENAL SEBAGAI RAJA HUTAN"],
+  ["JERAPAH","HEWAN DENGAN LEHER PANJANG"],
+  ["KANGGURU","HEWAN YANG MEMILIKI KANTONG"],
+  ["ZEBRA","HEWAN BERGARIS HITAM PUTIH"],
+  ["BURUNG","HEWAN YANG BISA TERBANG"],
+  ["PESAWAT","KENDARAAN DI UDARA"],
+  ["SEPEDA","KENDARAAN TANPA MESIN"],
+  ["BUS","KENDARAAN UNTUK BANYAK PENUMPANG"],
+  ["TRUK","KENDARAAN UNTUK MENGANGKUT BARANG"],
+  ["ROKET","KENDARAAN MENUJU LUAR ANGKASA"],
+  ["JAM","ALAT UNTUK MELIHAT WAKTU"],
+  ["PAYUNG","PELINDUNG DARI HUJAN"],
+  ["KACAMATA","ALAT BANTU UNTUK MELIHAT"],
+  ["GUNTING","ALAT UNTUK MEMOTONG"],
+  ["PENGHAPUS","ALAT UNTUK MENGHAPUS TULISAN"],
+  ["DOKTER","PEKERJAAN YANG MENGOBATI ORANG SAKIT"],
+  ["POLISI","MENJAGA KEAMANAN"],
+  ["PILOT","MENERBANGKAN PESAWAT"],
+  ["NELAYAN","MENANGKAP IKAN"],
+  ["KOKI","MEMASAK MAKANAN"],
+  ["MATAHARI","BERSINAR DI SIANG HARI"],
+  ["BULAN","TERLIHAT DI MALAM HARI"],
+  ["BINTANG","BERKILAU DI LANGIT MALAM"],
+  ["AWAN","TERLIHAT DI LANGIT"],
+  ["PETIR","KILATAN CAHAYA DI LANGIT"],
+  ["MERAH","WARNA DARAH"],
+  ["BIRU","WARNA LANGIT CERAH"],
+  ["HIJAU","WARNA DAUN"],
+  ["KUNING","WARNA PISANG"],
+  ["UNGU","SALAH SATU WARNA"]
+  
+  ];
+
+
+/* =========================
+   DATA KUIS
+========================= */
+
+const quizzes = [
+
+  ["Ibukota Indonesia adalah?", ["Jakarta", "Bandung", "Surabaya", "Medan"], 0],
+
+  ["Planet terbesar di tata surya adalah?", ["Mars", "Jupiter", "Venus", "Bumi"], 1],
+
+  ["Hewan tercepat di darat adalah?", ["Singa", "Kuda", "Cheetah", "Harimau"], 2],
+
+  ["Warna hasil campuran merah dan kuning?", ["Hijau", "Oranye", "Ungu", "Biru"], 1],
+
+  ["Berapa jumlah hari dalam satu minggu?", ["5", "6", "7", "8"], 2],
+
+  ["Proklamasi Indonesia terjadi pada tahun?", ["1945", "1940", "1950", "1965"], 0],
+
+  ["Alat untuk mengukur suhu adalah?", ["Barometer", "Termometer", "Mikroskop", "Kompas"], 1],
+
+  ["Benua terbesar di dunia adalah?", ["Afrika", "Asia", "Eropa", "Australia"], 1],
+
+  ["Air membeku pada suhu?", ["0°C", "50°C", "100°C", "10°C"], 0],
+
+  ["Siapa penemu lampu pijar yang terkenal?", ["Newton", "Edison", "Einstein", "Galileo"], 1],
+
+  ["Lambang sila pertama Pancasila adalah?", ["Pohon", "Bintang", "Padi", "Rantai"], 1],
+
+  ["Bahasa nasional Indonesia adalah?", ["Jawa", "Sunda", "Indonesia", "Melayu"], 2]
+
+  ["Ibukota Indonesia adalah?", ["Jakarta","Bandung","Surabaya","Medan"], 0],
+
+  ["Planet terbesar di tata surya adalah?", ["Mars","Jupiter","Venus","Bumi"], 1],
+
+  ["Air membeku pada suhu?", ["0°C","50°C","100°C","10°C"], 0],
+ 
+  ["Alat musik yang memiliki tuts adalah?", ["Gitar","Drum","Piano","Seruling"], 2],
+
+  ["Alat untuk melihat benda sangat kecil adalah?", ["Mikroskop","Teleskop","Kompas","Termometer"], 0],
+
+  ["Alat untuk mengukur suhu adalah?", ["Barometer","Termometer","Kompas","Mikroskop"], 1],
+
+  ["Alat untuk menulis adalah?", ["Pensil","Sendok","Sepatu","Piring"], 0],
+
+  ["Alat untuk menunjukkan arah adalah?", ["Kompas","Jam","Penggaris","Timbangan"], 0],
+
+  ["Apa nama satelit alami Bumi?", ["Matahari","Bulan","Mars","Venus"], 1],
+
+  ["Apa warna langit pada siang hari?", ["Merah","Biru","Hijau","Ungu"], 1],
+
+  ["Bahasa nasional Indonesia adalah?", ["Jawa","Sunda","Indonesia","Melayu"], 2],
+
+  ["Benda langit yang mengelilingi Bumi adalah?", ["Matahari","Bulan","Mars","Venus"], 1],
+
+  ["Bentuk bola adalah?", ["Kotak","Bulat","Segitiga","Datar"], 1],
+
+  ["Benua terbesar di dunia adalah?", ["Afrika","Asia","Eropa","Australia"], 1],
+
+  ["Berapa hasil 10 + 10?", ["10","15","20","25"], 2],
+
+  ["Berapa hasil 100 ÷ 10?", ["5","10","20","50"], 1],
+
+  ["Berapa hasil 5 × 5?", ["10","20","25","30"], 2],
+
+  ["Berapa jumlah bulan dalam satu tahun?", ["10","11","12","13"], 2],
+
+  ["Berapa jumlah hari dalam satu minggu?", ["5","6","7","8"], 2],
+
+  ["Berapa jumlah huruf dalam alfabet Inggris?", ["24","25","26","27"], 2],
+
+  ["Berapa jumlah sila dalam Pancasila?", ["3","4","5","6"], 2],
+
+  ["Berapa kaki laba-laba?", ["6","8","10","12"], 1],
+ 
+  ["Berapa menit dalam satu jam?", ["30","45","60","100"], 2],
+ 
+  ["Berapa sisi yang dimiliki segitiga?", ["3","4","5","6"], 0],
+ 
+  ["Buah berwarna kuning yang disukai monyet adalah?", ["Apel","Jeruk","Pisang","Mangga"], 2],
+ 
+  ["Gunung tertinggi di dunia adalah?", ["Everest","Semeru","Fuji","Kilimanjaro"], 0],
+ 
+  ["Hewan terbesar di dunia adalah?", ["Gajah","Paus Biru","Jerapah","Hiu"], 1],
+ 
+  ["Hewan yang bisa terbang adalah?", ["Kucing","Burung","Sapi","Ikan"], 1],
+ 
+  ["Hewan yang dikenal sebagai raja hutan adalah?", ["Harimau","Singa","Gajah","Serigala"], 1],
+ 
+  ["Hewan yang hidup di air dan bernapas dengan insang adalah?", ["Kucing","Ikan","Ayam","Kuda"], 1],
+ 
+  ["Hewan yang memiliki belalai adalah?", ["Singa","Gajah","Jerapah","Kuda"], 1],
+ 
+  ["Hewan yang menghasilkan madu adalah?", ["Semut","Lebah","Laba-laba","Kupu-kupu"], 1],
+ 
+  ["Hewan yang terkenal lambat adalah?", ["Cheetah","Kelinci","Kura-kura","Kuda"], 2]
+ 
+  ["Indonesia memiliki warna bendera?", ["Merah Putih","Biru Putih","Merah Biru","Hijau Putih"], 0],
+ 
+  ["Laut terbesar di dunia adalah?", ["Laut Jawa","Samudra Pasifik","Samudra Hindia","Laut Merah"], 1],
+ 
+  ["Lawan kata panas adalah?", ["Hangat","Dingin","Api","Terang"], 1],
+ 
+  ["Negara Jepang berada di benua?", ["Asia","Eropa","Afrika","Australia"], 0],
+ 
+  ["Planet yang kita tinggali adalah?", ["Mars","Venus","Bumi","Jupiter"], 2],
+ 
+  ["Proklamasi Indonesia terjadi pada tahun?", ["1945","1940","1950","1965"], 0],
+ 
+  ["Siapa penemu lampu pijar yang terkenal?", ["Newton","Edison","Einstein","Galileo"], 1],
+ 
+  ["Siapa presiden pertama Indonesia?", ["Soekarno","Soeharto","Habibie","Jokowi"], 0],
+ 
+  ["Warna daun biasanya adalah?", ["Merah","Hijau","Biru","Ungu"], 1],
+ 
+  ["Warna hasil campuran merah dan kuning?", ["Hijau","Oranye","Ungu","Biru"], 1],
+   
+  ["Berapa hasil 12 + 8?", ["18","20","22","24"], 1],
+  
+  ["Berapa hasil 6 × 7?", ["36","40","42","48"], 2],
+  
+  ["Berapa hasil 36 ÷ 6?", ["5","6","7","8"], 1],
+  
+  ["Berapa hasil 9 × 9?", ["72","81","90","99"], 1],
+
+  ["Hewan yang memiliki kantong adalah?", ["Kangguru","Singa","Gajah","Kuda"], 0],
+  
+  ["Hewan yang dapat berubah warna adalah?", ["Kucing","Bunglon","Kelinci","Sapi"], 1],
+  
+  ["Hewan yang hidup di Kutub Utara adalah?", ["Singa","Beruang Kutub","Harimau","Gajah"], 1],
+  
+  ["Hewan yang memiliki leher panjang adalah?", ["Jerapah","Zebra","Kuda","Sapi"], 0],
+  
+  ["Hewan yang dikenal lambat adalah?", ["Kelinci","Cheetah","Kura-kura","Kuda"], 2],
+
+  ["Apa warna darah manusia?", ["Biru","Hijau","Merah","Kuning"], 2],
+  
+  ["Organ yang digunakan untuk bernapas adalah?", ["Jantung","Paru-paru","Lambung","Hati"], 1],
+  
+  ["Organ yang memompa darah adalah?", ["Paru-paru","Otak","Jantung","Ginjal"], 2],
+  
+  ["Manusia memiliki berapa mata?", ["1","2","3","4"], 1],
+  
+  ["Bagian tubuh untuk mendengar adalah?", ["Mata","Telinga","Hidung","Tangan"], 1],
+  
+  ["Benda yang digunakan untuk mengetahui waktu adalah?", ["Kompas","Jam","Penggaris","Timbangan"], 1], 
+  
+  ["Alat untuk menghapus tulisan pensil adalah?", ["Penghapus","Penggaris","Buku","Pensil"], 0],
+  
+  ["Alat untuk memotong kertas adalah?", ["Sendok","Gunting","Pensil","Penghapus"], 1],
+  
+  ["Benda untuk melindungi dari hujan adalah?", ["Payung","Kacamata","Topi","Sepatu"], 0],
+  
+  ["Benda yang digunakan untuk melihat lebih jelas adalah?", ["Sepatu","Kacamata","Tas","Jam"], 1],
+
+  ["Berapakah jumlah hari dalam satu tahun biasa?", ["360","365","366","370"], 1],
+  
+  ["Berapakah jumlah jam dalam satu hari?", ["12","18","24","48"], 2],
+  
+  ["Berapakah jumlah menit dalam satu jam?", ["30","45","60","100"], 2],
+
+  ["Berapakah jumlah detik dalam satu menit?", ["30","45","60","100"], 2],
+
+  ["Bulan pertama dalam kalender adalah?", ["Januari","Februari","Maret","April"], 0]
+
+  ["Hari setelah Senin adalah?", ["Minggu","Selasa","Rabu","Kamis"], 1],
+
+  ["Hari sebelum Jumat adalah?", ["Rabu","Kamis","Sabtu","Minggu"], 1],
+
+  ["Bulan setelah Juni adalah?", ["Mei","Juli","Agustus","September"], 1],
+
+  ["Bulan terakhir dalam satu tahun adalah?", ["Oktober","November","Desember","Januari"], 2],
+
+  ["Hari pertama dalam satu minggu biasanya adalah?", ["Senin","Minggu","Jumat","Sabtu"], 1],
+
+  ["Warna bendera Indonesia adalah?", ["Merah Putih","Biru Putih","Merah Biru","Hijau Putih"], 0]
+
+  ["Lambang negara Indonesia adalah?", ["Garuda Pancasila","Elang","Harimau","Singa"], 0],
+
+  ["Semboyan Indonesia adalah?", ["Merdeka","Bhinneka Tunggal Ika","Indonesia Raya","Pancasila"], 1],
+
+  ["Mata uang Indonesia adalah?", ["Dollar","Rupiah","Ringgit","Yen"], 1],
+
+  ["Bahasa resmi Indonesia adalah?", ["Bahasa Jawa","Bahasa Indonesia","Bahasa Sunda","Bahasa Inggris"], 1],
+
+  ["Pulau terbesar di Indonesia adalah?", ["Jawa","Sumatra","Kalimantan","Bali"], 2],
+
+  ["Pulau Bali terkenal dengan?", ["Salju","Pantai","Gunung Es","Gurun"], 1],
+
+  ["Indonesia berada di kawasan?", ["Asia Tenggara","Eropa","Afrika","Amerika"], 0],
+
+  ["Indonesia memiliki berapa musim utama?", ["1","2","3","4"], 1],
+
+  ["Musim dengan banyak hujan disebut?", ["Musim panas","Musim hujan","Musim gugur","Musim dingin"], 1],
+
+  ["Planet terdekat dengan Matahari adalah?", ["Venus","Merkurius","Mars","Bumi"], 1],
+
+  ["Planet merah adalah?", ["Mars","Venus","Jupiter","Saturnus"], 0],
+
+  ["Planet yang memiliki cincin terkenal adalah?", ["Bumi","Mars","Saturnus","Venus"], 2],
+
+  ["Pusat tata surya adalah?", ["Bumi","Bulan","Matahari","Mars"], 2],
+
+  ["Bintang terbesar yang dekat dengan Bumi adalah?", ["Bulan","Matahari","Mars","Venus"], 1],
+
+  ["Air mendidih pada suhu?", ["0°C","50°C","100°C","200°C"], 2],
+
+  ["Air berubah menjadi es saat?", ["Membeku","Mendidih","Menguap","Mencair"], 0],
+
+  ["Proses air menjadi uap disebut?", ["Membeku","Menguap","Mencair","Mengalir"], 1],
+
+  ["Pelangi biasanya muncul setelah?", ["Gempa","Hujan","Malam","Angin"], 1],
+
+  ["Kilatan cahaya saat hujan disebut?", ["Petir","Kabut","Pelangi","Embun"], 0],
+
+  ["Siapa yang mengajar di sekolah?", ["Dokter","Guru","Polisi","Petani"], 1],
+
+  ["Siapa yang menjaga keamanan?", ["Guru","Dokter","Polisi","Pilot"], 2],
+
+  ["Siapa yang merawat orang sakit?", ["Dokter","Petani","Guru","Nelayan"], 0],
+
+  ["Siapa yang menerbangkan pesawat?", ["Pilot","Sopir","Masinis","Nelayan"], 0],
+
+  ["Siapa yang bekerja di sawah?", ["Petani","Dokter","Guru","Polisi"], 0],
+
+  ["Kendaraan yang berjalan di rel adalah?", ["Mobil","Kereta","Motor","Kapal"], 1],
+
+  ["Kendaraan yang terbang di udara adalah?", ["Kapal","Pesawat","Kereta","Sepeda"], 1],
+
+  ["Kendaraan yang berjalan di laut adalah?", ["Pesawat","Motor","Kapal","Kereta"], 2],
+
+  ["Kendaraan roda dua adalah?", ["Mobil","Bus","Motor","Truk"], 2],
+
+  ["Kendaraan untuk pergi ke luar angkasa adalah?", ["Roket","Kapal","Mobil","Kereta"], 0]
+
+  ]; 
+
+
+
+/* =========================
+   DATA EMOJI
+========================= */
+
+const emojis = [
+
+  ["🍎📱", "APPLE"],
+  ["🌧️☂️", "HUJAN"],
+  ["🏠🔥", "KEBAKARAN"],
+  ["🐱🐟", "KUCING MAKAN IKAN"],
+  ["🌞🌻", "BUNGA MATAHARI"],
+  ["🎂🎉", "ULANG TAHUN"],
+  ["🚗💨", "MOBIL CEPAT"],
+  ["📚✏️", "BELAJAR"],
+  ["❤️🔥", "CINTA MEMBARA"],
+  ["🌙⭐", "MALAM HARI"],
+  ["⚽🏆", "JUARA BOLA"],
+  ["🎵💃", "MENARI"]
+  ["🍎📱","APPLE"],
+  ["🌧️☂️","HUJAN"],
+  ["🏠🔥","KEBAKARAN"],
+  ["🐱🐟","KUCING MAKAN IKAN"],
+  ["🌞🌻","BUNGA MATAHARI"],
+  ["🎂🎉","ULANG TAHUN"],
+  ["🚗💨","MOBIL CEPAT"],
+  ["📚✏️","BELAJAR"],
+  ["❤️🔥","CINTA MEMBARA"],
+  ["🌙⭐","MALAM HARI"],
+  ["⚽🏆","JUARA BOLA"],
+  ["🎵💃","MENARI"],
+  ["🐟🌊","IKAN LAUT"],
+  ["🐶🏠","ANJING RUMAH"],
+  ["🌈☀️","PELANGI"],
+  ["🍔🍟","MAKANAN CEPAT SAJI"],
+  ["🎓📚","LULUS SEKOLAH"],
+  ["✈️🌍","KELILING DUNIA"],
+  ["🎁🎂","HADIAH ULANG TAHUN"],
+  ["🚲💨","SEPEDA CEPAT"],
+  ["👑👸","PUTRI"],
+  ["👑🤴","RAJA"],
+  ["🐱🐶","KUCING DAN ANJING"],
+  ["🌞🏖️","LIBURAN PANTAI"],
+  ["☔🌧️","MUSIM HUJAN"],
+  ["🏆🥇","JUARA SATU"],
+  ["📱💬","CHAT"],
+  ["💻🎮","GAME KOMPUTER"],
+  ["🍕🍔","MAKANAN"],
+  ["🎤🎵","BERNYANYI"],
+  ["🌙😴","SELAMAT MALAM"],
+  ["☀️😎","HARI CERAH"],
+  ["🌧️😭","SEDIH"],
+  ["😂🤣","TERTAWA"],
+  ["😍❤️","JATUH CINTA"],
+  ["😡🔥","MARAH"],
+  ["😱👻","TAKUT HANTU"],
+  ["🥳🎉","PESTA"],
+  ["🎂🕯️","KUE ULANG TAHUN"],
+  ["🎁❤️","HADIAH CINTA"],
+  ["🏠🔑","KUNCI RUMAH"],
+  ["🚪🔒","PINTU TERKUNCI"],
+  ["🛏️😴","TIDUR"],
+  ["🚿🧼","MANDI"],
+  ["🍽️🍛","MAKAN"],
+  ["☕🥛","MINUM"],
+  ["🧹🏠","BERSIH BERSIH RUMAH"],
+  ["🛒🛍️","BELANJA"],
+  ["🍳👨‍🍳","MEMASAK"],
+  ["📺🍿","MENONTON FILM"],
+  ["📚🏫","SEKOLAH"],
+  ["👨‍🏫📖","GURU MENGAJAR"],
+  ["✏️📒","MENULIS"],
+  ["📝📚","MENGERJAKAN TUGAS"],
+  ["🎓🏫","WISUDA"],
+  ["🚌🏫","PERGI KE SEKOLAH"],
+  ["👩‍🎓📖","SISWA BELAJAR"],
+  ["🧠💡","PINTAR"],
+  ["❓🤔","BERPIKIR"],
+  ["✅🎉","JAWABAN BENAR"],
+  ["❌😢","JAWABAN SALAH"],
+  ["🏆🎮","MENANG GAME"],
+  ["💀🎮","GAME OVER"],
+  ["🎯🏆","MENCAPAI TARGET"],
+  ["⭐🏅","BINTANG JUARA"],
+  ["🔥🏆","JUARA HEBAT"],
+  ["🎮🕹️","BERMAIN GAME"],
+  ["⏰🏃","KEHABISAN WAKTU"],
+  ["❤️➕","TAMBAH NYAWA"],
+  ["💯🔥","SEMPURNA"],
+  ["🚗🛣️","JALAN RAYA"],
+  ["✈️☁️","PESAWAT TERBANG"],
+  ["🚢🌊","KAPAL LAUT"],
+  ["🚆🛤️","KERETA API"],
+  ["🚲🌳","BERSEPEDA"],
+  ["🛵💨","MOTOR CEPAT"],
+  ["🚕🏙️","TAKSI"],
+  ["🚌👥","BUS"],
+  ["🚦🚗","LALU LINTAS"],
+  ["⛽🚙","ISI BENSIN"],
+  ["🐶🦴","ANJING MAKAN TULANG"],
+  ["🐱🥛","KUCING MINUM SUSU"],
+  ["🐰🥕","KELINCI MAKAN WORTEL"],
+  ["🐵🍌","MONYET MAKAN PISANG"],
+  ["🐼🎋","PANDA MAKAN BAMBU"],
+  ["🦁👑","RAJA HUTAN"],
+  ["🐘🌳","GAJAH"],
+  ["🦒🌿","JERAPAH"],
+  ["🐢🐌","HEWAN LAMBAT"],
+  ["🦅☁️","BURUNG TERBANG"],
+  ["🌳🌲","HUTAN"],
+  ["🏔️❄️","GUNUNG SALJU"],
+  ["🏖️🌊","PANTAI"],
+  ["🌋🔥","GUNUNG BERAPI"],
+  ["🌧️🌈","HUJAN DAN PELANGI"],
+  ["☀️🔥","PANAS"],
+  ["❄️🥶","DINGIN"],
+  ["🌊🐟","LAUT"],
+  ["🌴🏝️","PULAU"],
+  ["🌍🗺️","DUNIA"],
+  ["⚽🥅","SEPAK BOLA"],
+  ["🏀⛹️","BOLA BASKET"],
+  ["🏸🏆","BADMINTON"],
+  ["🏊🌊","BERENANG"],
+  ["🏃💨","BERLARI"],
+  ["🚴🏆","BALAP SEPEDA"],
+  ["🥊🥇","TINJU"],
+  ["🏆🥳","MENANG"],
+  ["🥇👑","JUARA"],
+  ["🎯🎯","TEPAT SASARAN"],
+  ["🍎🍌🍇","BUAH BUAHAN"],
+  ["🍔🥤","MAKANAN DAN MINUMAN"],
+  ["🍕🧀","PIZZA"],
+  ["🍜🥢","MIE"],
+  ["🍚🍗","NASI DAN AYAM"],
+  ["🍦🍫","ES KRIM COKELAT"],
+  ["🍩☕","DONAT DAN KOPI"],
+  ["🍉🍓","BUAH SEGAR"],
+  ["🥚🍳","TELUR GORENG"],
+  ["🍞🧈","ROTI"],
+  ["❤️👨‍👩‍👧","KELUARGA"],
+  ["👭❤️","SAHABAT"],
+  ["👋😊","HALO"],
+  ["🙏❤️","TERIMA KASIH"],
+  ["🎉👏","SELAMAT"],
+  ["😭💔","PATAH HATI"],
+  ["🤝😊","BERDAMAI"],
+  ["👨‍👩‍👧‍👦🏠","KELUARGA DI RUMAH"],
+  ["🎂🎁","ULANG TAHUN"],
+  ["💌❤️","SURAT CINTA"],
+  ["👻🏚️","RUMAH HANTU"],
+  ["🌙👻","HANTU MALAM"],
+  ["😱🏃","LARI KETAKUTAN"],
+  ["🔦🏚️","MENJELAJAH RUMAH"],
+  ["🚪👻","HANTU DI PINTU"],
+  ["💀☠️","MENAKUTKAN"],
+  ["🕷️😱","TAKUT LABA LABA"],
+  ["🌑🌲","HUTAN GELAP"],
+  ["🔪😱","BAHAYA"],
+  ["🏃‍♂️💨👻","LARI DARI HANTU"],
+
+  ["💻📱","TEKNOLOGI"],
+  ["🤖💻","ROBOT"],
+  ["🌐💬","INTERNET"],
+  ["📱📸","FOTO"],
+  ["🎥🍿","FILM"],
+  ["🎧🎵","MENDENGARKAN MUSIK"],
+  ["⌨️💻","MENGETIK"],
+  ["🔋📱","BATERAI"],
+  ["📶📱","SINYA L"],
+  ["🎮🔥","GAME SERU"]
+
+];
+
+
+/* =========================
+   CERITA HOROR
+========================= */
+
+const horror = [
+
+  {
+    t: "Kamu terbangun di rumah kosong. Lampu berkedip dan terdengar suara dari lantai atas...",
+    o: ["Naik ke atas", "Keluar rumah"],
+    a: 0
+  },
+
+  {
+    t: "Di atas ada pintu yang terkunci. Kamu menemukan kunci berkarat dan sebuah senter.",
+    o: ["Buka pintu", "Lari turun"],
+    a: 0
+  },
+
+  {
+    t: "Di balik pintu ada boneka tua. Tiba-tiba terdengar suara: Jangan lihat ke belakang!",
+    o: ["Menoleh", "Tetap diam"],
+    a: 1
+  },
+
+  {
+    t: "Kamu menemukan jalan rahasia menuju pintu keluar. Namun terdengar langkah mendekat!",
+    o: ["Bersembunyi", "Lari ke pintu keluar"],
+    a: 1
+  },
+  
+ {
+    t: "🌙 MALAM PERTAMA\n\nKamu terbangun di sebuah rumah tua yang tidak kamu kenal. Hujan turun sangat deras di luar. Tiba-tiba terdengar suara langkah   kaki dari lantai atas...",
+    o: ["Naik ke lantai atas 👣", "Mencari pintu keluar 🚪"],
+    a: 0
+  },
+
+ {
+    t: "👣 Kamu menaiki tangga perlahan. Setiap langkah membuat suara berderit. Di ujung lorong terdapat dua pintu: satu berwarna merah dan satu lagi berwarna hitam.",
+    o: ["Masuk pintu merah 🔴", "Masuk pintu hitam ⚫"],
+    a: 1
+  },
+
+ {
+    t: "🚪 Kamu membuka pintu hitam. Ruangan itu gelap gulita. Kamu menemukan sebuah senter di atas meja dan mendengar suara perempuan menangis.",
+    o: ["Mengambil senter 🔦", "Mencari sumber suara 😨"],
+    a: 0
+  },
+
+ {
+    t: "🔦 Dengan senter, kamu melihat tulisan di dinding: 'JANGAN PERNAH MENENGOK KE BELAKANG.' Tiba-tiba ada suara napas tepat di belakangmu...",
+    o: ["Menoleh ke belakang 😱", "Tetap menghadap depan 🏃"],
+    a: 1
+  },
+
+ {
+    t: "🏃 Kamu berlari keluar dari ruangan. Di lorong, kamu menemukan sebuah boneka tua yang tiba-tiba membuka matanya!",
+    o: ["Mengambil boneka itu 🧸", "Meninggalkan boneka dan lari 🏃"],
+    a: 1
+  },
+
+ {
+    t: "🏚️ Kamu sampai di sebuah ruangan besar. Ada tiga benda di atas meja: KUNCI 🔑, FOTO 📷, dan PISAU 🔪.",
+    o: ["Mengambil kunci 🔑", "Mengambil foto 📷", "Mengambil pisau 🔪"],
+    a: 0
+  },
+
+ {
+    t: "🔑 Kunci tersebut ternyata cocok dengan pintu bawah tanah. Dari balik pintu terdengar suara seseorang meminta tolong.",
+    o: ["Membuka pintu bawah tanah 🚪", "Pergi mencari jalan lain 🏃"],
+    a: 0
+  },
+
+ {
+    t: "⬇️ Kamu menuruni tangga menuju ruang bawah tanah. Udara semakin dingin. Di sana terdapat sebuah cermin besar.",
+    o: ["Melihat ke dalam cermin 🪞", "Melewati cermin tanpa melihat 👀"],
+    a: 1
+  },
+
+ {
+    t: "🪞 Saat melewati cermin, bayanganmu tidak bergerak! Bayangan itu tersenyum dan menunjuk ke arah sebuah pintu rahasia.",
+    o: ["Membuka pintu rahasia 🚪", "Menghancurkan cermin 💥"],
+    a: 0
+  },
+
+ {
+    t: "🚪 Di balik pintu rahasia kamu menemukan lorong panjang dengan banyak foto orang hilang. Salah satu foto adalah fotomu sendiri!",
+    o: ["Mengambil foto 📷", "Terus berlari 🏃💨"],
+    a: 1
+  },
+
+ {
+    t: "😱 Kamu berlari sampai menemukan sebuah ruangan dengan radio tua. Radio itu tiba-tiba menyala sendiri dan berkata: 'Kamu hampir berhasil keluar...'",
+    o: ["Mendengarkan radio 📻", "Mematikan radio ❌"],
+    a: 0
+  },
+
+ {
+    t: "📻 Radio memberikan petunjuk: 'Untuk keluar, cari pintu dengan simbol bulan.' Kamu melihat tiga pintu dengan simbol berbeda.",
+    o: ["Pintu ☀️", "Pintu 🌙", "Pintu ⭐"],
+    a: 1
+  },
+
+ {
+    t: "🌙 Kamu membuka pintu dengan simbol bulan. Kamu akhirnya melihat cahaya dari luar rumah! Namun sebelum keluar, seseorang memanggil namamu dari belakang...",
+    o: ["Menoleh 😨", "Tetap berjalan menuju cahaya 🚶"],
+    a: 1
+  },
+
+ {
+    t: "🚪 Kamu hampir berhasil keluar. Tiba-tiba pintu depan tertutup sendiri dan rumah mulai bergetar!",
+    o: ["Mencoba membuka pintu 🔑", "Mencari jendela 🪟"],
+    a: 0
+  },
+
+ {
+    t: "🔑 Kamu menggunakan kunci yang ditemukan sebelumnya. Pintu akhirnya terbuka perlahan...",
+    o: ["Langsung keluar 🏃", "Melihat ke dalam rumah sekali lagi 👀"],
+    a: 0
+  },
+
+ {
+    t: "🌅 Kamu berhasil keluar dari rumah tua tersebut! Saat matahari mulai terbit, kamu menoleh dan melihat rumah itu sudah tidak ada...",
+    o: ["🏆 AKHIRI PETUALANGAN", "👻 KEMBALI KE RUMAH"],
+    a: 0
+  }
+
+  ];
+
+
+/* =========================
+   CERITA PETUALANGAN
+========================= */
+
+const adventure = [
+
+  {
+    t: "Kamu menemukan peta harta karun di hutan. Ada dua jalan.",
+    o: ["Jalan sungai", "Jalan gunung"],
+    a: 1
+  },
+
+  {
+    t: "Di gunung kamu menemukan jembatan tua dan gua gelap.",
+    o: ["Lewati jembatan", "Masuk gua"],
+    a: 0
+  },
+
+  {
+    t: "Di seberang jembatan ada peti terkunci. Teka-tekinya: Aku punya banyak halaman tapi bukan pohon.",
+    o: ["BUKU", "RUMAH"],
+    a: 0
+  },
+
+  {
+    t: "Peti terbuka! Kamu melihat harta, tetapi ada penjaga.",
+    o: ["Berbicara baik-baik", "Mengambil diam-diam"],
+    a: 0
+  },
+
+  {
+    t: "🗺️ AWAL PETUALANGAN\n\nSuatu pagi, kamu menemukan sebuah peta tua di loteng rumah. Di peta itu terdapat tanda X besar dan tulisan: 'HARTA KARUN YANG HILANG'.",
+    o: ["Mengikuti peta 🗺️", "Menyimpan peta dan pulang 🏠"],
+    a: 0
+  },
+
+  {
+    t: "🌳 Kamu mengikuti peta hingga masuk ke hutan misterius. Di depanmu terdapat dua jalan: jalan sungai dan jalan menuju gunung.",
+    o: ["Mengikuti sungai 🌊", "Menuju gunung ⛰️"],
+    a: 1
+  },
+
+  {
+    t: "⛰️ Jalan menuju gunung sangat curam. Kamu menemukan seorang kakek tua yang berkata bahwa jalan menuju harta sangat berbahaya.",
+    o: ["Mendengarkan nasihat kakek 👴", "Mengabaikannya dan lanjut 🏃"],
+    a: 0
+  },
+
+  {
+    t: "👴 Kakek memberikan sebuah kompas ajaib 🧭. Ia berkata: 'Kompas ini akan menunjukkan jalan yang benar.'",
+    o: ["Mengambil kompas 🧭", "Menolak kompas ❌"],
+    a: 0
+  },
+
+  {
+    t: "🧭 Kompas menunjukkan arah menuju sebuah jembatan tua. Di bawah jembatan terdapat sungai yang sangat deras.",
+    o: ["Melewati jembatan 🌉", "Menyeberangi sungai 🏊"],
+    a: 0
+  },
+
+  {
+    t: "🌉 Kamu berhasil melewati jembatan. Di depanmu terdapat sebuah gua besar yang gelap.",
+    o: ["Masuk ke dalam gua 🕳️", "Mencari jalan lain 🌲"],
+    a: 0
+  },
+
+  {
+    t: "🕳️ Di dalam gua, kamu menemukan tiga jalan. Salah satunya memiliki tanda berbentuk bintang ⭐.",
+    o: ["Jalan kiri ⬅️", "Jalan bertanda bintang ⭐", "Jalan kanan ➡️"],
+    a: 1
+  },
+
+  {
+    t: "⭐ Kamu menemukan sebuah peti kecil. Peti itu memiliki teka-teki: 'Aku memiliki banyak halaman tetapi bukan pohon.'",
+    o: ["BUKU 📚", "RUMAH 🏠", "BATU 🪨"],
+    a: 0
+  },
+
+  {
+    t: "📚 Jawabanmu benar! Peti terbuka dan berisi sebuah kunci emas 🔑.",
+    o: ["Mengambil kunci emas 🔑", "Meninggalkan kunci ❌"],
+    a: 0
+  },
+
+  {
+    t: "🚪 Kamu menemukan pintu besar di dalam gua. Pintu tersebut memiliki lubang berbentuk kunci.",
+    o: ["Menggunakan kunci emas 🔑", "Mencoba mendobrak pintu 💥"],
+    a: 0
+  },
+
+  {
+    t: "🏛️ Pintu terbuka! Kamu masuk ke sebuah ruangan kuno yang dipenuhi patung dan tulisan misterius.",
+    o: ["Membaca tulisan 📜", "Menyentuh patung 🗿"],
+    a: 0
+  },
+
+  {
+    t: "📜 Tulisan tersebut berbunyi: 'Hanya orang yang jujur yang dapat menemukan harta.' Kamu melihat sebuah kantong emas milik seseorang.",
+    o: ["Mengambil emas 💰", "Mencari pemiliknya 🤝"],
+    a: 1
+  },
+
+  {
+    t: "🤝 Kamu menemukan seorang petualang tua yang kehilangan kantong emasnya. Karena kamu jujur, ia memberikanmu sebuah petunjuk rahasia.",
+    o:["Menerima petunjuk 📝", "Menolak dan pergi 🚶"],
+    a: 0
+  },
+
+  {
+    t: "📝 Petunjuk menunjukkan sebuah pintu dengan tiga simbol: ☀️ 🌙 ⭐. Hanya satu yang benar.",
+    o: ["☀️ Matahari", "🌙 Bulan", "⭐ Bintang"],
+    a: 2
+  },
+
+  {
+    t: "⭐ Pintu dengan simbol bintang terbuka. Kamu menemukan ruangan besar yang penuh dengan jebakan!",
+    o: ["Berjalan perlahan 🐢", "Berlari cepat 🏃💨"],
+    a: 0
+  },
+
+  {
+    t: "⚠️ Kamu berhasil melewati jebakan. Di depanmu terdapat jurang dengan tali tua.",
+    o:["Menggunakan tali 🪢", "Melompat melewati jurang 🦘"],
+    a: 0
+  },
+
+  {
+    t: "🏞️ Kamu sampai di sebuah lembah rahasia. Di tengah lembah terdapat pohon raksasa dengan pintu kecil.",
+    o: ["Membuka pintu pohon 🌳", "Memanjat pohon 🌲"],
+    a: 0
+  },
+
+  {
+    t: "🌳 Di dalam pohon terdapat ruangan rahasia dan sebuah peti harta besar!",
+    o: ["Langsung membuka peti 💰", "Memeriksa jebakan terlebih dahulu 🔍"],
+    a: 1
+  },
+
+  {
+    t: "🔍 Kamu menemukan jebakan tersembunyi! Setelah menonaktifkannya, peti bisa dibuka dengan aman.",
+    o: ["Membuka peti 🏆", "Meninggalkan peti 🚶"],
+    a: 0
+  },
+
+  {
+    t: "🏆✨ PETI HARTA TERBUKA!\n\nDi dalamnya terdapat emas, permata, dan sebuah mahkota kuno. Kamu berhasil menemukan HARTA KARUN YANG HILANG!",
+    o: ["🎉 Rayakan kemenangan", "🏠 Pulang membawa harta"],
+    a: 1
+  },
+
+  {
+    t: "🏠 Kamu pulang sebagai petualang hebat. Semua orang kagum dengan keberanian dan kejujuranmu!\n\n🏆 SELAMAT! KAMU MENYELESAIKAN PETUALANGAN!",
+    o: ["🏆 SELESAI", "🔄 MULAI LAGI"],
+    a: 0
+  }
+
+];
+
+
+
+/* =========================
+   FUNGSI UMUM
+========================= */
+
+function shuffle(array) {
+  return [...array].sort(() => Math.random() - 0.5);
+}
+
+
+function show(id) {
+
+  document.querySelectorAll(".screen").forEach(screen => {
+    screen.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+}
+
+
+function update() {
+
+  score = Math.max(0, score);
+
+  document.getElementById("score").textContent = score;
+
+  document.getElementById("lives").textContent =
+    "❤️".repeat(Math.max(0, lives));
+
+  document.getElementById("level").textContent = level;
+
+  document.getElementById("streak").textContent = streak;
+
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
+function startTimer(seconds = 20) {
+
+  clearInterval(timer);
+
+  time = seconds;
+
+  const fill = document.getElementById("timerFill");
+
+  fill.style.width = "100%";
+
+  timer = setInterval(() => {
+
+    time--;
+
+    fill.style.width = (time / seconds * 100) + "%";
+
+    if (time <= 0) {
+
+      clearInterval(timer);
+
+      wrong("⏰ Waktu habis!");
+
+    }
+
+  }, 1000);
+
+}
+
+
+/* =========================
+   JAWABAN BENAR
+========================= */
+
+function correct(message = "🎉 BENAR! +10 SKOR") {
+
+  clearInterval(timer);
+
+  score += 10 + streak * 2;
+
+  streak++;
+
+  if (streak % 3 === 0) {
+    level++;
+  }
+
+  update();
+
+  document.getElementById("notice").textContent = message;
+
+  setTimeout(() => {
+
+    startGame(current);
+
+  }, 1000);
+
+}
+
+
+/* =========================
+   JAWABAN SALAH
+========================= */
+
+function wrong(message = "❌ SALAH! -1 NYAWA") {
+
+  clearInterval(timer);
+
+  lives--;
+
+  streak = 0;
+
+  update();
+
+  document.getElementById("notice").textContent = message;
+
+  if (lives <= 0) {
+
+    setTimeout(gameOver, 800);
+
+  } else {
+
+    setTimeout(() => {
+
+      startGame(current);
+
+    }, 1100);
+
+  }
+
+}
+
+
+/* =========================
+   GAME OVER
+========================= */
+
+function gameOver() {
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="win">💀</div>
+
+    <div class="question">GAME OVER</div>
+
+    <div class="hint">
+      Skor akhir: ${score}
+    </div>
+
+    <div class="row">
+
+      <button onclick="resetGame()">
+        🔄 Main Lagi
+      </button>
+
+    </div>
+
+  `;
+
+  document.getElementById("notice").textContent =
+    "Jangan menyerah, coba lagi!";
+
+}
+
+
+/* =========================
+   RESET GAME
+========================= */
+
+function resetGame() {
+
+  score = 0;
+  lives = 5;
+  level = 1;
+  streak = 0;
+
+  update();
+
+  goHome();
+
+}
+
+
+/* =========================
+   MENU UTAMA
+========================= */
+
+function goHome() {
+
+  clearInterval(timer);
+
+  show("home");
+
+}
+
+
+function title(text) {
+
+  show("game");
+
+  document.getElementById("gameTitle").textContent = text;
+
+  document.getElementById("notice").textContent = "";
+
+}
+
+
+/* =========================
+   MULAI GAME
+========================= */
+
+function startGame(type) {
+
+  current = type;
+
+  if (type === "word") {
+    wordGame();
+  }
+
+  if (type === "quiz") {
+    quizGame();
+  }
+
+  if (type === "math") {
+    mathGame();
+  }
+
+  if (type === "emoji") {
+    emojiGame();
+  }
+
+  if (type === "horror") {
+    storyGame(horror, "👻 RUMAH HOROR");
+  }
+
+  if (type === "adventure") {
+    storyGame(adventure, "🗺️ PETUALANGAN HARTA");
+  }
+
+}
+
+
+/* =========================
+   GAME TEBAK KATA
+========================= */
+
+function wordGame() {
+
+  title("🔤 TEBAK KATA");
+
+  let data =
+    wordData[Math.floor(Math.random() * wordData.length)];
+
+  let answer = data[0];
+
+  let letters = shuffle(answer.split(""));
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="hint">
+      💡 Petunjuk: ${data[1]}
+    </div>
+
+    <div class="word">
+      ${letters.join(" ")}
+    </div>
+
+    <input
+      id="answer"
+      placeholder="Tulis jawaban..."
+      autocomplete="off"
+    >
+
+    <div class="row">
+
+      <button onclick="checkWord('${answer}')">
+        Jawab ✅
+      </button>
+
+    </div>
+
+  `;
+
+  document.getElementById("answer").focus();
+
+  startTimer(25);
+
+}
+
+
+function checkWord(answer) {
+
+  let value =
+    document.getElementById("answer")
+    .value
+    .trim()
+    .toUpperCase();
+
+  if (value === answer) {
+
+    correct();
+
+  } else {
+
+    wrong();
+
+  }
+
+}
+
+
+/* =========================
+   GAME KUIS
+========================= */
+
+function quizGame() {
+
+  title("🧠 KUIS PINTAR");
+
+  let q =
+    quizzes[Math.floor(Math.random() * quizzes.length)];
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="question">
+      ${q[0]}
+    </div>
+
+    <div class="options">
+
+      ${q[1].map((option, index) => `
+
+        <button
+          class="option"
+          onclick="checkQuiz(this, ${index}, ${q[2]})"
+        >
+
+          ${String.fromCharCode(65 + index)}.
+          ${option}
+
+        </button>
+
+      `).join("")}
+
+    </div>
+
+  `;
+
+  startTimer(20);
+
+}
+
+
+function checkQuiz(button, selected, answer) {
+
+  if (selected === answer) {
+
+    button.classList.add("correct");
+
+    correct();
+
+  } else {
+
+    button.classList.add("wrong");
+
+    wrong();
+
+  }
+
+}
+
+
+/* =========================
+   GAME MATEMATIKA
+========================= */
+
+function mathGame() {
+
+  title("🔢 MATEMATIKA CEPAT");
+
+  let a =
+    Math.ceil(Math.random() * 20) + level;
+
+  let b =
+    Math.ceil(Math.random() * 20);
+
+  let operators = ["+", "-", "×"];
+
+  let operator =
+    operators[Math.floor(Math.random() * operators.length)];
+
+  let answer;
+
+  if (operator === "+") {
+    answer = a + b;
+  }
+
+  if (operator === "-") {
+    answer = a - b;
+  }
+
+  if (operator === "×") {
+    answer = a * b;
+  }
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="question">
+
+      ${a} ${operator} ${b} = ?
+
+    </div>
+
+    <input
+      id="mathAns"
+      type="number"
+      placeholder="Jawaban"
+    >
+
+    <div class="row">
+
+      <button onclick="checkMath(${answer})">
+        Jawab ⚡
+      </button>
+
+    </div>
+
+  `;
+
+  startTimer(Math.max(8, 18 - level));
+
+  document.getElementById("mathAns").focus();
+
+}
+
+
+function checkMath(answer) {
+
+  let value =
+    Number(document.getElementById("mathAns").value);
+
+  if (value === answer) {
+
+    correct("⚡ HEBAT! Jawaban benar!");
+
+  } else {
+
+    wrong();
+
+  }
+
+}
+
+
+/* =========================
+   GAME TEBAK EMOJI
+========================= */
+
+function emojiGame() {
+
+  title("😄 TEBAK EMOJI");
+
+  let data =
+    emojis[Math.floor(Math.random() * emojis.length)];
+
+  document.getElementById("content").innerHTML = `
+
+    <div class="emoji">
+      ${data[0]}
+    </div>
+
+    <div class="hint">
+      Tebak arti emoji di atas!
+    </div>
+
+    <input
+      id="emojiAns"
+      placeholder="Tulis jawaban"
+    >
+
+    <div class="row">
+
+      <button onclick="checkEmoji('${data[1]}')">
+        Tebak 🎯
+      </button>
+
+    </div>
+
+  `;
+
+  startTimer(25);
+
+  document.getElementById("emojiAns").focus();
+
+}
+
+
+function checkEmoji(answer) {
+
+  let value =
+    document.getElementById("emojiAns")
+    .value
+    .trim()
+    .toUpperCase();
+
+  if (
+    value === answer ||
+    (answer.includes(value) && value.length > 3)
+  ) {
+
+    correct("😄 TEPAT SEKALI!");
+
+  } else {
+
+    wrong();
+
+  }
+
+}
+
+
+/* =========================
+   GAME CERITA
+========================= */
+
+function storyGame(data, gameName) {
+
+  title(gameName);
+
+  let step = 0;
+
+
+  function render() {
+
+    let story = data[step];
+
+    document.getElementById("content").innerHTML = `
+
+      <div class="story">
+
+        ${story.t}
+
+      </div>
+
+      <div class="options">
+
+        ${story.o.map((option, index) => `
+
+          <button
+            class="option"
+            onclick="window.storyChoice(${index})"
+          >
+
+            ${option}
+
+          </button>
+
+        `).join("")}
+
+      </div>
+
+    `;
+
+  }
+
+
+  window.storyChoice = function(choice) {
+
+    let story = data[step];
+
+    if (choice === story.a) {
+
+      score += 15;
+
+      streak++;
+
+      update();
+
+      step++;
+
+      if (step >= data.length) {
+
+        document.getElementById("content").innerHTML = `
+
+          <div class="win">
+            🏆🎉
+          </div>
+
+          <div class="question">
+            KAMU MENANG!
+          </div>
+
+          <div class="hint">
+            Petualangan berhasil diselesaikan!
+          </div>
+
+          <div class="row">
+
+            <button onclick="goHome()">
+              Kembali ke Menu
+            </button>
+
+          </div>
+
+        `;
+
+      } else {
+
+        render();
+
+      }
+
+    } else {
+
+      wrong("💀 Pilihan itu membawa masalah!");
+
+    }
+
+  };
+
+
+  render();
+
+}
+
+
+/* =========================
+   TOMBOL ENTER
+========================= */
+
+document.addEventListener("keydown", function(e) {
+
+  if (e.key === "Enter") {
+
+    if (current === "word") {
+
+      document
+        .querySelector('[onclick^="checkWord"]')
+        ?.click();
+
+    }
+
+    if (current === "math") {
+
+      document
+        .querySelector('[onclick^="checkMath"]')
+        ?.click();
+
+    }
+
+    if (current === "emoji") {
+
+      document
+        .querySelector('[onclick^="checkEmoji"]')
+        ?.click();
+
+    }
+
+  }
+
+});
+
+
+update();
+
+</script>
+
+</body>
+</html>
 </body>
 </html>
